@@ -50,6 +50,7 @@ function save_user()//function to save user details
 	
 var i;
 var flag=0;
+var numberOfUser=parseInt(localStorage.getItem("nou"))||0;
 	document.getElementById('hrlogin').style.visibility="visible";
 	document.getElementById('udetails').style.visibility="visible";
 	var uid=document.getElementById('uid').value;
@@ -69,12 +70,15 @@ var flag=0;
     var user=new makeobject(uid,uname,upass,uremark);
     
 
-     for(i=0;i<uarray.length;i++)
-    {
-    	if(uid==uarray[i].uid2)
+     for(i=0;i<numberOfUser;i++)
+    { 
+      var key="user"+i;
+      var pullobj=JSON.parse(localStorage.getItem(key));
+    	if(uid==pullobj.uid2)
       {
     		flag==1;
     	alert("This user already exist");
+      document.forms['abc'].reset();
     	return false;
          
       }	
@@ -95,11 +99,12 @@ var flag=0;
 	     document.forms['abc'].reset();
 	     return false;
     }
+
 }
 function empdetail()
 {
   
-	var index=parseInt(localStorage.getItem("index"));
+	var index=parseInt(localStorage.getItem("index"))||0;
   var key2="user"+index;
   var empObject=JSON.parse(localStorage.getItem(key2));
   var temp=document.createElement('p');
@@ -147,8 +152,11 @@ function update_remark()
 }
 function selectemp()
 {
+  
+  document.getElementById('udetails').style.visibility="hidden";
   document.getElementById('hroption').style.display="none";
-  var numberOfUser=parseInt(localStorage.getItem("nou"));
+  var numberOfUser=parseInt(localStorage.getItem("nou"))||0;
+  
   document.getElementById('ureg').style.display="none";
   /*var temp1=document.createElement('p');
   var text1=document.createTextNode("<a href='HomePage.html' style='text-align:right'>logout</a>");
@@ -159,6 +167,7 @@ function selectemp()
    document.getElementById('showDetail').innerHTML="<p style='text-align:right'><a href='HomePage.html'>logout</a></p>";  
   for(var emplist=0;emplist<numberOfUser;emplist++)
   {
+
     var key="user"+emplist;
     var pullobj=JSON.parse(localStorage.getItem(key));
     
@@ -171,10 +180,16 @@ function selectemp()
     var element=document.getElementById("showDetail");
     
     element.appendChild(temp2);
-    document.getElementById('showDetail').innerHTML+="<input type='button' value='update remark'>";
+    
     document.getElementById('showDetail').innerHTML+="<br /><br />";
 
   }
+  if(numberOfUser==0)
+    {
+     
+      document.getElementById('showDetail').innerHTML+="<p>oops! There is no emloyee registered yet!!</p>";
+      
+    }
 
 return false;
 }
