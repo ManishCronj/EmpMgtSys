@@ -143,13 +143,40 @@ function empsearch()
 }
 function update_remark()
 {
-  
-  var pullobj1= JSON.parse(localStorage.getItem("key1"));
-  alert(pullobj1.uremark2);
-  uarray[checkvalue].uremark2=pullobj1.uremark2;
-  alert(uarray[checkvalue].uremark2);
+  document.getElementById('showDetail').innerHTML+="<br /><center><label>Enter employee's Id : </label><input type='text' id='idForRemark'>&nbsp;&nbsp;<label>Give remark : </label><input type='text' id='updatedRemark'><br /><br /><input type='button' value='update' onclick='updateRemark()'></center>";
+
   return false;
 }
+function updateRemark()
+{
+  var i;
+  var numberOfUser=parseInt(localStorage.getItem('nou'))||0;
+ var empId=document.getElementById("idForRemark").value;
+ var empRemark=document.getElementById("updatedRemark").value;
+ for(i=0;i<numberOfUser;i++)
+ {
+  var key="user"+i;
+  var pullobj=JSON.parse(localStorage.getItem(key));
+  if(empId==pullobj.uid2)
+  {
+    pullobj.uremark2=empRemark;
+    localStorage.setItem(key,JSON.stringify(pullobj));
+    break;
+  }
+ }
+ if(i==numberOfUser-1)
+ {
+  alert("Employee doesn't exist");
+ }
+ if(i<numberOfUser)
+ {
+ document.getElementById('showDetail').innerHTML+="<br /> <center><p><h3>Remark Updated!!</h3></p></center>";
+ 
+ }
+
+return false;
+}
+
 function selectemp()
 {
   
@@ -190,6 +217,7 @@ function selectemp()
       document.getElementById('showDetail').innerHTML+="<p>oops! There is no emloyee registered yet!!</p>";
       
     }
+    document.getElementById('showDetail').innerHTML+="<center><input type='button' value='update remark' onclick='update_remark()'></center>";    
 
 return false;
 }
