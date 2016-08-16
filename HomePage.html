@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <script type="text/javascript" src="Employee1.js"></script>
+      <script type="text/javascript" src="Employee2.js"></script>
+      <link  rel="stylesheet" type="text/css" href="assign.css" />
+      <title>	HR Login</title>
+  </head>
+<body>
+
+<header><center><h1>Employee Management System</h1></center></header>
+            <br /><br />
+            <p style="text-align:left"><div id="showDetail" >
+
+            </div></p>
+ <div id="hrlogin"><!--1st div-->
+    <form onsubmit='return hrcompare()'><!--form  field start-->
+        <center><label>&nbsp;&nbsp;&nbsp;&nbsp;Email:</label><input type="email" id="name" placeholder="Enter email" />     </center><br />
+        <center><label>Password:</label><input type="password" id="pass"  /></center><br />
+        <center>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" id="submit" value="submit"></center>
+    </form >
+ </div>
+ <div id="hroption">
+ <form>
+ <input type="button" value="add user" onclick="adduser()">
+ <input type="button" id="butt" value="User's detail" onclick="selectemp()">
+ </form>
+ </div>
+<div id="ureg">
+<p style="text-align:right;color:red"><a href="HomePage.html">logout </a></p><!-- 2nd div-->
+ <form id="abc" onsubmit="return save_user();">
+   <center>
+   
+       <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Id : </label><input type="text" id="uid" /><br /><br />   
+       <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full Name : </label><input type="text" id="uname" /><br /><br />
+       <label>User'password : </label><input type="password" id="upass" /><br /><br />
+       <label>Initial Remark : </label><input type="text" id="uremark"><br /><br />
+       <input type="submit" id="submit" value="add user">
+       <input type="button"  id="butt" value="User's detail" onclick="selectemp()">
+
+   </center>
+ </form>
+</div>
+<div id="eselect">
+</div>
+<div id="udetails"><!--3rd div-->
+    <h3>Registered Employees</h3>
+</div>
+<div id="display">
+     <h3>Employee details</h3>
+</div>
+<div id="empinput">
+<h3>Employee Login</h3>
+</div>
+</body>
+</html>

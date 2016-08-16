@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link  rel="stylesheet" type="text/css" href="assign.css" />
+<script src="Employee1.js" type="text/javascript"></script>
+<script src="Employee2.js" type="text/javascript"></script>
+<script> 
+	function empdetail()
+	{
+	var pullobj= JSON.parse(localStorage.getItem("key"));
+    document.getElementById('edetail').innerHTML="<br />Employee Name: " + pullobj.uname2 + "<br />Employee Id:  " + 
+    pullobj.uid2 +  "<br />Employee Remark: "+ pullobj.uremark2; 
+    }
+</script>
+
+</head>
+<body bgcolor="#252525">
+<header ><h1>Employee Management System</h1></header>
+
+<form>
+	<center>
+	        <input type="button" value="View Details" onclick="empdetail()">&nbsp;&nbsp;
+            <input type ="button" value="Give Remark" onclick="remark()">
+	        <input type="button" value="Logout" onclick="window.open('my.html')"> 
+	</center>
+</form>
+<p id="edetail"></p>
+<div id="empremark"></div>
+</body>
+</html>

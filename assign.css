@@ -1,0 +1,39 @@
+body
+{
+margin:0;
+text-align:center;
+color:red;
+background-color:#ddd; 
+}
+header
+{
+	background-color: #121212;
+}
+#ureg
+{
+visibility:hidden;
+}
+#udetails
+{
+visibility:hidden;
+}
+#display
+{
+	visibility:hidden;
+}
+#empinput
+{
+	visibility:hidden;
+}
+#eselect
+{
+	visibility: hidden;
+}
+#hroption
+{
+	visibility: hidden;
+}
+#showDetail
+{
+	text-align:left;
+}
