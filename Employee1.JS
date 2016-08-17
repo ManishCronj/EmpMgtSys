@@ -153,6 +153,16 @@ function updateRemark()
   var numberOfUser=parseInt(localStorage.getItem('nou'))||0;
  var empId=document.getElementById("idForRemark").value;
  var empRemark=document.getElementById("updatedRemark").value;
+ if(empId==null || empId=="") 
+   {
+    alert("Enter employee's id");
+    return false;
+   }
+ if(empRemark==null || empRemark=="")
+ {
+  alert("Enter remark");
+  return false;
+ }       
  for(i=0;i<numberOfUser;i++)
  {
   var key="user"+i;
@@ -164,9 +174,10 @@ function updateRemark()
     break;
   }
  }
- if(i==numberOfUser-1)
+ if(i==numberOfUser)
  {
   alert("Employee doesn't exist");
+  return false;
  }
  if(i<numberOfUser)
  {
@@ -183,7 +194,7 @@ function selectemp()
   document.getElementById('udetails').style.visibility="hidden";
   document.getElementById('hroption').style.display="none";
   var numberOfUser=parseInt(localStorage.getItem("nou"))||0;
-  
+  document.getElementById('showDetail').style.display="unset";
   document.getElementById('ureg').style.display="none";
   /*var temp1=document.createElement('p');
   var text1=document.createTextNode("<a href='HomePage.html' style='text-align:right'>logout</a>");
@@ -214,9 +225,12 @@ function selectemp()
   if(numberOfUser==0)
     {
      
+      document.getElementById('showDetail').style.display="unset";
       document.getElementById('showDetail').innerHTML+="<p>oops! There is no emloyee registered yet!!</p>";
+      document.getElementById('hroption').style.display="unset";
       
     }
+    if(numberOfUser!=0)
     document.getElementById('showDetail').innerHTML+="<center><input type='button' value='update remark' onclick='update_remark()'></center>";    
 
 return false;
@@ -224,7 +238,15 @@ return false;
 
 function adduser()
 {
-  document.getElementById('ureg').style.visibility="visible"
+
+  var numberOfUser=parseInt(localStorage.getItem("nou"))||0;
+  if(numberOfUser==0)
+  {
+    document.getElementById('showDetail').style.display="none";
+    document.getElementById('ureg').style.display="unset";
+
+  }
+  document.getElementById('ureg').style.visibility="visible";
   document.getElementById('abc').style.visibility="visible";
   document.getElementById('hroption').style.display="none";
   return false;

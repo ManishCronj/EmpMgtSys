@@ -1,4 +1,4 @@
-sbody
+body
 {
 margin:0;
 text-align:center;
@@ -36,4 +36,5 @@ visibility:hidden;
 #showDetail
 {
 	text-align:left;
+	display: none;
 }
