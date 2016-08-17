@@ -99,7 +99,6 @@ var numberOfUser=parseInt(localStorage.getItem("nou"))||0;
 	     document.forms['abc'].reset();
 	     return false;
     }
-
 }
 function empdetail()
 {
@@ -115,32 +114,8 @@ function empdetail()
   return false; 	
 }
 
-function empsearch()
-{
-  var i;
-  
-  var empid=document.getElementById('eid').value;
-  
+//function to update Employee's remark
 
-  var emppass=document.getElementById('epass').value;
-  
-  for(i=0;i<uarray.length;i++)
-  {
-    
-    if(empid==uarray[i].uid2 && emppass==uarray[i].upass2)
-    {
-      localStorage.setItem("key",JSON.stringify(uarray[i]));
-      
-      checkvalue=i; 
-      
-      window.open('abcd.html');
-      return false;
-      break;
-    }
-     
-  }
-   
-}
 function update_remark()
 {
   document.getElementById('showDetail').innerHTML+="<br /><center><label>Enter employee's Id : </label><input type='text' id='idForRemark'>&nbsp;&nbsp;<label>Give remark : </label><input type='text' id='updatedRemark'><br /><br /><input type='button' value='update' onclick='updateRemark()'></center>";
@@ -149,8 +124,10 @@ function update_remark()
 }
 function updateRemark()
 {
-  var i;
-  var numberOfUser=parseInt(localStorage.getItem('nou'))||0;
+ var i;
+ var flag=false;
+ var pullobj;
+ var numberOfUser=parseInt(localStorage.getItem('nou'))||0;
  var empId=document.getElementById("idForRemark").value;
  var empRemark=document.getElementById("updatedRemark").value;
  if(empId==null || empId=="") 
@@ -166,85 +143,68 @@ function updateRemark()
  for(i=0;i<numberOfUser;i++)
  {
   var key="user"+i;
-  var pullobj=JSON.parse(localStorage.getItem(key));
+  pullobj=JSON.parse(localStorage.getItem(key));
   if(empId==pullobj.uid2)
   {
     pullobj.uremark2=empRemark;
     localStorage.setItem(key,JSON.stringify(pullobj));
+    flag=true;
     break;
   }
  }
- if(i==numberOfUser)
+ if(flag==false)
  {
   alert("Employee doesn't exist");
   return false;
  }
  if(i<numberOfUser)
  {
+ alert(pullobj.uname2+"'s Remark Updated"); 
  document.getElementById('showDetail').innerHTML+="<br /> <center><p><h3>Remark Updated!!</h3></p></center>";
- 
+ selectemp();
  }
-
 return false;
 }
 
 function selectemp()
 {
-  
   document.getElementById('udetails').style.visibility="hidden";
   document.getElementById('hroption').style.display="none";
   var numberOfUser=parseInt(localStorage.getItem("nou"))||0;
   document.getElementById('showDetail').style.display="unset";
   document.getElementById('ureg').style.display="none";
-  /*var temp1=document.createElement('p');
-  var text1=document.createTextNode("<a href='HomePage.html' style='text-align:right'>logout</a>");
-  temp1.appendChild(text1);
-  var element=document.getElementById("showDetail");
-  element.appendChild(temp1);
-  */
-   document.getElementById('showDetail').innerHTML="<p style='text-align:right'><a href='HomePage.html'>logout</a></p>";  
+  document.getElementById('showDetail').innerHTML="<p style='text-align:right'><a href='HomePage.html'>logout</a></p>";  
   for(var emplist=0;emplist<numberOfUser;emplist++)
   {
-
     var key="user"+emplist;
     var pullobj=JSON.parse(localStorage.getItem(key));
-    
     var temp2=document.createElement('span');
-    
     var text2=document.createTextNode("Name : "+pullobj.uname2+"     Id : "+pullobj.uid2+"     Remark : "+pullobj.uremark2);
-    
-    
     temp2.appendChild(text2);
     var element=document.getElementById("showDetail");
-    
     element.appendChild(temp2);
-    
     document.getElementById('showDetail').innerHTML+="<br /><br />";
-
   }
   if(numberOfUser==0)
     {
-     
       document.getElementById('showDetail').style.display="unset";
       document.getElementById('showDetail').innerHTML+="<p>oops! There is no emloyee registered yet!!</p>";
       document.getElementById('hroption').style.display="unset";
-      
     }
     if(numberOfUser!=0)
+    {
     document.getElementById('showDetail').innerHTML+="<center><input type='button' value='update remark' onclick='update_remark()'></center>";    
-
-return false;
+    }
+    return false;
 }
 
 function adduser()
 {
-
   var numberOfUser=parseInt(localStorage.getItem("nou"))||0;
   if(numberOfUser==0)
   {
     document.getElementById('showDetail').style.display="none";
     document.getElementById('ureg').style.display="unset";
-
   }
   document.getElementById('ureg').style.visibility="visible";
   document.getElementById('abc').style.visibility="visible";
